@@ -1,0 +1,26 @@
+<div class="container">
+<h1>Mis Pins</h1>
+
+
+    <% @pins.each do |pin| %>
+    <div class="col-md-3">
+    <div class="thumbnail">
+    <%= pin.name %>
+     <%= pin.description %>
+        <%= image_tag(pin.photo, :class =>'img-responsive') %>
+        <div class="buttons" style="margin-top: 10px; margin-bottom: 10px">
+        <%= link_to 'Ver', pin, :class =>'btn' %>
+        <% if pin.user == current_user %>
+        <%= link_to 'Editar', edit_pin_path(pin), :class =>'btn' %>
+        <%= link_to 'Eliminar', pin, method: :delete, data: { confirm: '¿Estas seguro?'}, :class =>'btn'  %>
+        <% end %>
+        </div>
+        </div>
+      </div>
+    <% end %>
+
+<br>
+<% if user_signed_in? %>
+<%= link_to 'Nuevo Pins', new_pin_path %>
+<% end %>
+</div>

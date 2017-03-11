@@ -1,0 +1,45 @@
+<h1>Listado Pins.</h1>
+<% if user_signed_in? %>
+<%= link_to 'Nuevo Pins', new_pin_path %>
+<% end %>
+
+<div id="container">
+
+
+
+    <% @pins.each do |pin| %>
+    <div class="item" style="width: 25%">
+    <div class="thumbnail">
+    <%= pin.name %>
+     <%= pin.description %>
+        <%= image_tag(pin.photo, :class =>'img-responsive') %>
+        <div class="buttons" style="margin-top: 10px; margin-bottom: 10px">
+        <%= link_to 'Ver', pin, :class =>'btn' %>
+        <% if pin.user == current_user %>
+        <%= link_to 'Editar', edit_pin_path(pin), :class =>'btn' %>
+
+        <%= link_to 'Eliminar', pin, method: :delete, data: { confirm: '¿Estas seguro?'}, :class =>'btn'  %>
+        <% end %>
+        </div>
+        </div>
+      </div>
+    <% end %>
+
+</div>
+
+<script type="text/javascript">
+var $container = $('#container');
+    //initialize
+    $container.masonry({
+        columnWidth: 200,
+        itemSelector: '.item'
+    });
+$(window).load(function(){
+    var $container = $('#container');
+    //initialize
+    $container.masonry({
+        columnWidth: 200,
+        itemSelector: '.item'
+    });
+    })
+</script>
